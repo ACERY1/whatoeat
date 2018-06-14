@@ -1,0 +1,12 @@
+/**/
+$white: #fff;
+
+.card {
+  &-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    background: $white;
+  }
+}
