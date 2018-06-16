@@ -11,7 +11,10 @@ export default class Home extends React.Component {
 	render() {
 		return (
 			<div>
-				this is Home Page
+				<div>
+					hello this is home page
+				</div>
+				{this.props.children}
 			</div>
 		)
 	}

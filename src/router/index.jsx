@@ -5,35 +5,70 @@ import React from 'react';
 
 import routerConfig from './config'
 
-function recursiveRenderRoute(config = []) {
-	const routers = []
-	
-	const renderRoute = (parentPath, routerItem) => {
-		if (!routerItem.path || !routerItem.component ) {
-			throw new Error('[Router Error]: routerItem Params Error')
+/**
+ * 将config对象扁平化
+ * @param config
+ * @return {Array}
+ */
+function recursiveRouteConfig(config = []) {
+	const routes = []
+	const configRouteObject = (parentPath, routeItem, parentComponent) => {
+		if (!routeItem.path || !routeItem.component) {
+			throw new Error('[Config RouteObject Error]: routerItem Params Error')
 		}
-		routers.push(
-			<Route
-				exact
-				path={(parentPath+routerItem.path).replace(/\/+/g, '/')}
-				key={(parentPath+routerItem.path).replace(/\/+/g, '/')}
-				component={routerItem.component}
-			/>
-		)
-		if (Array.isArray(routerItem.children)) {
-			routerItem.children.forEach(r => {
-				renderRoute(routerItem.path ,r)
+		let routeObject = {
+			path: (parentPath + routeItem.path).replace(/\/+/g, '/'),
+			component: routeItem.component
+		}
+		if (parentComponent) {
+			routeObject['parent'] = parentComponent
+		}
+		routes.push(routeObject)
+		
+		if (Array.isArray(routeItem.children)) {
+			routeItem.children.forEach(item => {
+				configRouteObject(routeItem.path, item, routeItem.component)
 			})
 		}
-		
 	}
-	
-	config.forEach(item => {
-		renderRoute('', item)
+	config.forEach(r => {
+		configRouteObject('', r, null)
 	})
-	
+	return routes
+}
+
+function recursiveRenderRoute(flatRoutes = []) {
+	const routers = []
+	flatRoutes.forEach(route => {
+		if (route.parent) {
+			routers.push(
+				<Route
+					key={route.path}
+					exact
+					path={route.path}
+					render={(props) => {
+						return React.createElement(
+							route.parent,
+							props,
+							React.createElement(route.component, props)
+						)
+					}}
+				/>
+			)
+		} else {
+			routers.push(
+				<Route
+					key={route.path}
+					exact
+					path={route.path}
+					component={route.component}
+				/>
+			)
+		}
+		
+	})
 	return <Switch>{routers}</Switch>
 }
 
-const routes = recursiveRenderRoute(routerConfig)
+const routes = recursiveRenderRoute(recursiveRouteConfig(routerConfig))
 export default <Router>{routes}</Router>

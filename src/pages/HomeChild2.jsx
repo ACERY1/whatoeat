@@ -15,7 +15,7 @@ export default class HomeChild2 extends React.Component {
 	render() {
 		return (
 			<div>
-				this is HomeChild 1
+				this is HomeChild 2
 			</div>
 		)
 	}
