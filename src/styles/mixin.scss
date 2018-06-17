@@ -1,0 +1,29 @@
+// 横向盒子
+@mixin rowBox() {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+// 竖向盒子
+@mixin colBox() {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+// 水平垂直居中盒子
+@mixin allMidBox() {
+  display: flex;
+  flex-flow: nowrap column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin rowMidBox(){
+  @include rowBox();
+  align-items: center;
+}
+
+@mixin colMidBox(){
+  @include colBox();
+  align-items: center;
+}
