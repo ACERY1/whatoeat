@@ -1,12 +1,11 @@
 .card {
-  overflow: hidden; // construct BFC
   &-imgBox{
     height: 8rem;
     width: 8rem;
     overflow: hidden;
     object-fit: contain;
     border-radius: 4px;
-    box-shadow: 0 10px 20px #7d7d7d;
+    box-shadow: 0 10px 26px #7d7d7d;
     &-img{
       height: 100%;
       width: 100%;
