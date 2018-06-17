@@ -1,4 +1,4 @@
-import Home from '../pages/Home'
+import Home from '../pages/Home/'
 
 /**
  * 路由配置项
