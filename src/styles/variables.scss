@@ -11,6 +11,9 @@ $C_Background: #FFFFFF;
 $C_Surface: #FFFFFF;
 $C_Error: #C51162;
 $C_Border: #D3D3D3;
+$C_DevideLine1st: #000000;
+$C_DevideLine2nd: rgba(0,0,0,.6);
+$C_DevideLine3rd: rgba(0,0,0,.38);
 
 $fontClr_1st: #000000; // 一级提示
 $fontClr_2nd: rgba(0,0,0,.6); // 二级提示
@@ -27,4 +30,9 @@ $T_Subtitle2: 14px;
 $T_Body1: 16px;
 $T_Body2: 14px;
 $T_Button: 14px;
+
+$Size_DevideLine_light: 1px;
+$Size_DevideLine_normal: 2px;
+$Size_DevideLine_bold: 4px;
+$Size_DevideLine_bolder: 8px;
 
