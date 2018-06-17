@@ -1,14 +1,15 @@
 import React from 'react'
 import Card from '../../components/Card/index'
+import {observer,inject} from 'mobx-react';
 import './style.scss'
 
-
+@inject('appState')
+@observer
 export default class Home extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {}
 	}
-	
 	
 	
 	render() {
@@ -20,6 +21,7 @@ export default class Home extends React.Component {
 					<img className="home-buttons-item" src="/assets/icons/pick.png" alt="pick"/>
 				</div>
 				<p className="t4-c1__bold mt10 fadeInLeft">CLICK ME</p>
+				<p>{this.props.appState.test}</p>
 			</div>
 		)
 	}
