@@ -7,6 +7,7 @@ class Card extends React.Component {
 		return (
 			<div className="card l-box__verMid">
 				<div className="card-imgBox mt20">
+					<img className="card-imgBox-icon" src="/assets/icons/upload.png" alt="upload" onClick={this.props.uploadFn}/>
 					<img className="card-imgBox-img" src={this.props.url} alt="FOOD"/>
 				</div>
 				<hr className="line-c3__s1 w8 mt20"/>
@@ -24,11 +25,15 @@ Card.propTypes = {
 	// PropTypes.[type]
 	url: PropTypes.string,
 	title: PropTypes.string,
-	cont: PropTypes.string
+	cont: PropTypes.string,
+	uploadFn: PropTypes.func
 }
 
 Card.defaultProps = {
 	url: 'http://cdn.helloyzy.cn/images/bg2.jpg',
 	title: '大大泡泡糖',
-	cont: '好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩'
+	cont: '好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩好吃又好玩',
+	uploadFn: () => {
+		console.log('upload')
+	}
 }

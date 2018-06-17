@@ -20,8 +20,7 @@ export default class Home extends React.Component {
 				<div className="home-buttons l-box__allMid mt20 w8">
 					<img className="home-buttons-item" src="/assets/icons/pick.png" alt="pick"/>
 				</div>
-				<p className="t4-c1__bold mt10 fadeInLeft">CLICK ME</p>
-				<p>{this.props.appState.test}</p>
+				<p className="t4-c1__bold mt10 ">CLICK ME!</p>
 			</div>
 		)
 	}
