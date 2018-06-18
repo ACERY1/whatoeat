@@ -19,7 +19,13 @@
       height: 30px;
       width: 30px;
       border-radius: 4px;
-      background: rgba(0,0,0,.38);
+    }
+    &-musk{
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background: url("/assets/icons/loading.svg") center no-repeat;
+      background-color: #FFFFFF;
     }
   }
 

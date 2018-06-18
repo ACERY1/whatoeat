@@ -2,6 +2,7 @@ import {observable, action} from 'mobx';
 import request from 'axios'
 
 const baseURL = 'http://localhost:4000'
+// const baseURL = 'http://192.168.31.204:4000'
 
 class AppState {
 	
@@ -15,6 +16,7 @@ class AppState {
 		imgUrl: 'http://cdn.helloyzy.cn/images/bg2.jpg',
 		id: '',
 	} // 当前显示food
+	@observable picIsLoading = true // 图片是否在加载
 	
 	// 改变用户状态
 	@action changeUserState(state) {
@@ -47,7 +49,7 @@ class AppState {
 	}
 	
 	@action getNewFood() {
-		// TODO 发送请求 写入数组 返回当前数组
+		this.picIsLoading = true
 		return request
 			.get(`${baseURL}/food`)
 			.then(res => {
@@ -57,7 +59,9 @@ class AppState {
 			})
 	}
 	
-	
+	@action picLoaded () {
+		this.picIsLoading = false
+	}
 }
 
 export default AppState

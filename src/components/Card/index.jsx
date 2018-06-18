@@ -1,14 +1,38 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import './style.scss'
+import {observer,inject} from 'mobx-react';
 
+@inject('appState')
+@observer
 class Card extends React.Component {
-	render () {
+	constructor(props) {
+		super(props)
+		this.state = {
+			isLoading: true
+		}
+	}
+	
+	Musk = () => {
+		if (this.props.appState.picIsLoading) {
+			return (
+				<div className="card-imgBox-musk"/>
+			)
+		}
+		return false
+	}
+	
+	PicLoadedHandler = ()=> {
+		this.props.appState.picLoaded()
+	}
+	
+	render() {
 		return (
 			<div className="card l-box__verMid">
 				<div className="card-imgBox mt20">
+					{this.Musk()}
 					<img className="card-imgBox-icon" src="/assets/icons/upload.png" alt="upload" onClick={this.props.uploadFn}/>
-					<img className="card-imgBox-img" src={this.props.url} alt="FOOD"/>
+					<img className="card-imgBox-img" src={this.props.url} alt="FOOD" onLoad={this.PicLoadedHandler}/>
 				</div>
 				<hr className="line-c3__s1 w8 mt20"/>
 				<h5 className="t2-c1__normal mt20">{this.props.title}</h5>
