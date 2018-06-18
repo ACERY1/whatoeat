@@ -2,6 +2,7 @@ import {observable, action} from 'mobx';
 import request from 'axios'
 
 const baseURL = 'http://localhost:4000'
+
 // const baseURL = 'http://192.168.31.204:4000'
 
 class AppState {
@@ -11,7 +12,7 @@ class AppState {
 	@observable userState = 'search' // 用户当前状态 搜索|编辑|上传|出错
 	@observable viewHistory = [] // 用户的搜索历史
 	@observable food = {
-		name:'吃啥',
+		name: '吃啥',
 		desc: '随便吃吃',
 		imgUrl: 'http://cdn.helloyzy.cn/images/bg2.jpg',
 		id: '',
@@ -38,7 +39,9 @@ class AppState {
 	
 	// 查看前一个食物
 	@action prevHistory() {
-		return this.viewHistory.pop()
+		if (this.viewHistory.length) {
+			this.updateFood(this.viewHistory.pop())
+		}
 	}
 	
 	@action updateFood(foodInfo) {
@@ -50,16 +53,24 @@ class AppState {
 	
 	@action getNewFood() {
 		this.picIsLoading = true
+		this.addNewHistory(
+			{
+				imgUrl: this.food.imgUrl,
+				name: this.food.name,
+				desc: this.food.desc,
+				id: this.food.id
+			}
+		)
 		return request
 			.get(`${baseURL}/food`)
 			.then(res => {
 				if (res.data.code) return console.error('Get Food Wrong!')
-				this.addNewHistory(res.data.data)
+				if (this.food.id === res.data.data.id) this.picIsLoading = false
 				this.updateFood(res.data.data)
 			})
 	}
 	
-	@action picLoaded () {
+	@action picLoaded() {
 		this.picIsLoading = false
 	}
 }

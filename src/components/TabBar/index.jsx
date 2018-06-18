@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
+import './style.scss'
 
 export default class TabBar extends React.Component {
 	constructor(props) {
@@ -15,16 +16,15 @@ export default class TabBar extends React.Component {
 	
 	render() {
 		return (
-			<div>
+			<div className="TabBar">
 			
 			</div>
 		)
 	}
 }
 
-Component.propTypes = {
+TabBar.propTypes = {
 	// PropTypes.[type]
 }
-
-Component.defaultProps = {}
+TabBar.defaultProps = {}
 
